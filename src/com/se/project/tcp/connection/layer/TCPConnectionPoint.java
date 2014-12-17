@@ -14,7 +14,7 @@ public interface TCPConnectionPoint {
 
 	void open();
 	
-	void read(byte[] data,int length) ;
+	void read(byte[] data) ;
 	
 	void write(byte[] data );
 	

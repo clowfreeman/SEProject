@@ -35,12 +35,11 @@ public class TCPClient implements TCPConnectionPoint {
 		
 	}
 
-	public void read(byte[] data1, int length) {
+	public void read(byte[] data1) {
 		InputStream in;
 		try {
 			in = sock.getInputStream();
-			data1=new byte[length];
-			in.read(data1,0,length);
+			in.read(data1,0,data1.length);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +50,6 @@ public class TCPClient implements TCPConnectionPoint {
 		OutputStream out;
 		try {
 			out = sock.getOutputStream();
-			data1=new byte[data1.length];
 			out.write(data1,0,data1.length);
 		} catch (IOException e) {
 			e.printStackTrace();
