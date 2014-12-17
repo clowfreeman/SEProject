@@ -15,9 +15,9 @@ import java.net.Socket;
  */
 public class TCPServer implements TCPConnectionPoint {
 
-	public ServerSocket servSock;
-	public Socket sock;
-	public int listeningPort;
+	private ServerSocket servSock;
+	private Socket sock;
+	private int listeningPort;
 	
 	public TCPServer(int port){
 		listeningPort=port;
@@ -40,9 +40,7 @@ public class TCPServer implements TCPConnectionPoint {
 		try {
 			in = sock.getInputStream();
 			data1=new byte[length];
-			for (int i=0;i<length;i++){
-				in.read(data1,0,length);
-			}
+			in.read(data1,0,length);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,9 +52,7 @@ public class TCPServer implements TCPConnectionPoint {
 		OutputStream out;
 		try {
 			out = sock.getOutputStream();
-			for (int i=0;i<data1.length;i++){
 			out.write(data1,0,data1.length);
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +61,7 @@ public class TCPServer implements TCPConnectionPoint {
 
 	public void close() {
 		try {
+			sock.close();
 			servSock.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -15,9 +15,9 @@ import java.net.Socket;
  */
 public class TCPClient implements TCPConnectionPoint {
 
-	public Socket sock;
-	public String destIp;
-	public int destPort;
+	private Socket sock;
+	private String destIp;
+	private int destPort;
 	
 	public TCPClient(String ip,int port){
 		destIp=ip;
@@ -40,9 +40,7 @@ public class TCPClient implements TCPConnectionPoint {
 		try {
 			in = sock.getInputStream();
 			data1=new byte[length];
-			for (int i=0;i<length;i++){
-				in.read(data1,0,length);
-			}
+			in.read(data1,0,length);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,9 +51,8 @@ public class TCPClient implements TCPConnectionPoint {
 		OutputStream out;
 		try {
 			out = sock.getOutputStream();
-			for (int i=0;i<data1.length;i++){
+			data1=new byte[data1.length];
 			out.write(data1,0,data1.length);
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
