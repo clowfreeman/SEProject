@@ -24,38 +24,36 @@ public class TCPServer implements TCPConnectionPoint {
 		
 	}
 	
+	public String getRemoteIpAddress(){
+        return sock.getInetAddress().getHostAddress();}
+	
 	public void open() {
 		try {
 			servSock=new ServerSocket(listeningPort);
 			sock=servSock.accept();
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Nu s-a putut realiza conexiunea!");
+            System.exit(-1);
 		}
 		
 	}
 
-	public void read(byte[] data1) {
+	public void read(byte[] data1) throws IOException {
 		InputStream in;
-		try {
+
 			in = sock.getInputStream();
 			
 			in.read(data1,0,data1.length);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 	}
 		
 
-	public void write(byte[] data1) {
+	public void write(byte[] data1) throws IOException {
 		OutputStream out;
-		try {
+
 			out = sock.getOutputStream();
 			out.write(data1,0,data1.length);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 	}
 
@@ -64,7 +62,8 @@ public class TCPServer implements TCPConnectionPoint {
 			sock.close();
 			servSock.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			 System.out.println("Nu s-a putut inchide conexiunea!");
+	         System.exit(-1);
 		}
 		
 	}
